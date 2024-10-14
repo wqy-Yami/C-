@@ -16,7 +16,7 @@ struct addressBook
 	int storedNum = 0;
 	person m_addressbook[Max];
 };
-void writeText()
+void add()
 {
 	person human1;
 	cout << "请输入姓名" << endl;
@@ -33,9 +33,8 @@ void writeText()
 		<< "手机号：" << human1.m_telephone << "\t\t" << "地址：" << human1.m_address << endl;
 	ofs.close();	
 }
-int main()
+void display()
 {
-	writeText();
 	ifstream ifs;
 	ifs.open("personalInformation.text", ios::in);
 	if (!ifs.is_open())
@@ -47,6 +46,43 @@ int main()
 	{
 		cout << buffer << endl;
 	}
+}
+void mainMenu()
+{
+	cout << "**********************" << endl;
+	cout << "****" << " 1-添加联系人 " << "****" << endl;
+	cout << "****" << " 2-显示联系人 " << "****" << endl;
+	cout << "****" << " 0-退出通讯录 " << "****" << endl;
+	cout << "******************" << endl;
+}
+void tt()
+{
+	int num = 0;
+	while(1)
+	{
+		mainMenu();		
+		cin >> num;
+		switch (num)
+		{
+		case 1:
+			add();
+			break;
+		case 2:
+			display();
+			break;
+		case 0:
+			return;
+		default:
+			cout << "输入有误，请重新输入" << endl;;
+			break;
+		}
+		system("pause");
+		system("cls");
+	}
+}
+int main()
+{
+	tt();
 	system("pause");
 	return 0;
 }
