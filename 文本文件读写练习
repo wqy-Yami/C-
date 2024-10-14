@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+#define Max 10
+
+struct person
+{
+	string m_name;
+	int m_age = 0;
+	string m_telephone;
+	string m_address;
+};
+struct addressBook
+{
+	int storedNum = 0;
+	person m_addressbook[Max];
+};
+void writeText()
+{
+	person human1;
+	cout << "请输入姓名" << endl;
+	cin >> human1.m_name;
+	cout << "请输入年龄" << endl;
+	cin >> human1.m_age;
+	cout << "请输入手机号" << endl;
+	cin >> human1.m_telephone;
+	cout << "请输入地址" << endl;
+	cin >> human1.m_address;
+	ofstream ofs;
+	ofs.open("personalInformation.text", ios::app);
+	ofs << "姓名：" << human1.m_name << "\t\t" << "年龄：" << human1.m_age << "\t\t"
+		<< "手机号：" << human1.m_telephone << "\t\t" << "地址：" << human1.m_address << endl;
+	ofs.close();	
+}
+int main()
+{
+	writeText();
+	ifstream ifs;
+	ifs.open("personalInformation.text", ios::in);
+	if (!ifs.is_open())
+	{
+		cout << "文件打开失败" << endl;
+	}
+	char buffer[1024] = { 0 };
+	while (ifs.getline(buffer, sizeof(buffer)))
+	{
+		cout << buffer << endl;
+	}
+	system("pause");
+	return 0;
+}
